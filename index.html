@@ -3,61 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AC Parceria - Portal de Transporte</title>
-
-  <!-- PWA meta -->
+  <meta name="description" content="Portal de Transporte da AC Parceria e Terraplenagem">
   <meta name="theme-color" content="#b00000" />
+  <title>AC Parceria - Portal de Transporte</title>
+  
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-
-  <style>
-    :root{
-      --primary: #b00000;
-      --primary-dark: #8a0000;
-      --bg: #ffffff;
-      --card: #f3f3f3;
-      --text: #222;
-      --radius: 12px;
-      --gap: 14px;
-    }
-    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);transition:background .25s,color .25s}
-    header{background:var(--primary);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px}
-    header img.logo{height:44px}
-    header h1{font-size:16px;margin:0}
-    .container{max-width:720px;margin:18px auto;padding:16px}
-    .welcome{display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px}
-    .avatar{width:160px;height:auto;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.12)}
-    .btn{display:block;width:100%;padding:14px;border-radius:10px;background:var(--primary);color:#fff;text-decoration:none;text-align:center;font-weight:700;margin-bottom:12px;box-shadow:0 6px 14px rgba(176,0,0,.12)}
-    .btn.secondary{background:#333;color:#fff}
-    .card{background:var(--card);padding:14px;border-radius:10px;margin-bottom:12px}
-    .top-actions{display:flex;gap:10px;justify-content:flex-end;padding:10px}
-    .icon-btn{background:#fff;border-radius:10px;padding:8px;cursor:pointer;border:1px solid rgba(0,0,0,.06)}
-    h2{margin:8px 0 12px 0;color:var(--primary-dark)}
-    small.note{display:block;color:#666;margin-top:6px}
-
-    /* Rotas list */
-    .routes{display:grid;grid-template-columns:1fr;gap:10px}
-    .route-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:#fff;border:1px solid rgba(0,0,0,.04)}
-    .route-item button{background:transparent;border:0;color:var(--primary);font-weight:700;cursor:pointer}
-
-    /* Modal base */
-    .modal-back{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px}
-    .modal{background:var(--bg);max-width:520px;width:100%;padding:18px;border-radius:12px}
-    .modal h3{margin-top:0}
-    .close{float:right;background:#eee;padding:6px 8px;border-radius:8px;border:0;cursor:pointer}
-
-    /* Dark */
-    body.dark{background:#0e0e10;color:#e8e8e8}
-    body.dark .card{background:#121217}
-    body.dark .modal{background:#111114}
-    body.dark .btn{background:var(--primary-dark)}
-    body.dark header{background:var(--primary-dark)}
-
-    /* responsive */
-    @media(min-width:800px){
-      .routes{grid-template-columns:1fr 1fr}
-      .welcome{flex-direction:row;gap:24px;text-align:left}
-    }
-  </style>
+  <link rel="icon" href="logo.jpg" type="image/jpg">
+  
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- JS externo -->
+  <script src="app.js" defer></script>
 </head>
 <body>
 
@@ -66,93 +24,95 @@
   <h1>AC PARCERIA E TERRAPLENAGEM — Portal de Transporte</h1>
 </header>
 
-<div class="top-actions container" style="justify-content:space-between;gap:10px">
-  <div style="display:flex;gap:8px;align-items:center">
-    <button class="icon-btn" id="installBtn" style="display:none">📥 Instalar</button>
+<div class="top-actions container">
+  <div>
+    <button class="icon-btn" id="installBtn" style="display:none" aria-label="Instalar aplicativo">
+      📥 Instalar
+    </button>
   </div>
-  <div style="display:flex;gap:8px;align-items:center">
-    <button class="icon-btn" id="darkToggle" title="Alternar tema">🌙</button>
+  <div>
+    <button class="icon-btn" id="darkToggle" title="Alternar tema" aria-label="Alternar tema claro/escuro">
+      🌙
+    </button>
   </div>
 </div>
 
 <main class="container">
-
   <!-- TELA DE BOAS VINDAS -->
   <section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
     <img src="avatar.png" class="avatar" alt="Avatar AC" />
-    <div style="max-width:520px">
+    <div>
       <h2 id="welcomeTitle">Bem-vindo ao Portal de Transporte</h2>
       <p>Rotas, registro de entrada/saída e avisos oficiais da <strong>AC Parceria e Terraplenagem</strong>.</p>
       <p class="card" style="margin-top:12px">
-        ⏱️ <strong>Importante:</strong> O formulário de controle de veículo deve ser preenchido **2× ao dia** — ao iniciar a jornada (entrada) e ao finalizar (saída).
+        ⏱️ <strong>Importante:</strong> O formulário de controle de veículo deve ser preenchido <strong>2× ao dia</strong> — ao iniciar a jornada (entrada) e ao finalizar (saída).
       </p>
-      <button class="btn" onclick="enterApp()">Entrar no Portal</button>
+      <button class="btn" onclick="enterApp()" aria-label="Entrar no portal">
+        Entrar no Portal
+      </button>
     </div>
   </section>
 
   <!-- MENU PRINCIPAL -->
-  <section id="mainMenu" style="display:none">
+  <section id="mainMenu" style="display:none" aria-label="Menu principal">
     <h2>Menu</h2>
-
+    
     <div class="card">
-      <a class="btn" href="https://forms.gle/UDniKxPqcMKGUhFQA" target="_blank">📋 Preencher Controle de Veículo (Entrada / Saída)</a>
+      <a class="btn" href="https://forms.gle/UDniKxPqcMKGUhFQA" target="_blank" rel="noopener noreferrer">
+        📋 Preencher Controle de Veículo (Entrada / Saída)
+      </a>
       <small class="note">Use ao iniciar e ao terminar sua jornada. Obrigatório todos os dias.</small>
     </div>
 
     <div class="card">
-      <a class="btn" onclick="openModal('avisosModal')">📢 Avisos & Comunicados</a>
+      <button class="btn" onclick="openModal('avisosModal')">
+        📢 Avisos & Comunicados
+      </button>
       <small class="note">Leia sempre antes de iniciar a rota.</small>
     </div>
 
     <div class="card">
-      <a class="btn" onclick="openSection('rotasSection')">🗺️ Selecionar Rota</a>
+      <button class="btn" onclick="openSection('rotasSection')">
+        🗺️ Selecionar Rota
+      </button>
       <small class="note">Selecione a rota que irá conduzir — ao clicar, abre o Google Maps com navegação.</small>
     </div>
 
     <div class="card">
-      <a class="btn secondary" onclick="openModal('ajudaModal')">❓ Ajuda / Explicação dos Botões</a>
+      <button class="btn secondary" onclick="openModal('ajudaModal')">
+        ❓ Ajuda / Explicação dos Botões
+      </button>
       <small class="note">Instruções rápidas e contatos de suporte.</small>
     </div>
   </section>
 
   <!-- ROTAS -->
-  <section id="rotasSection" style="display:none">
+  <section id="rotasSection" style="display:none" aria-label="Seleção de rotas">
     <h2>Rotas Disponíveis</h2>
     <p>Selecione abaixo a rota que você irá conduzir:</p>
 
     <div class="routes" style="margin-top:12px">
-      <!-- Rota 01 (pronto) -->
       <div class="route-item">
-        <div>
+        <div class="route-info">
           <div style="font-weight:800">ROTA 01 — (Colaboradores / Base)</div>
-          <small style="color:#666">Duração estimada: 30 Minutos⏱  — Paradas: • </small>
+          <small style="color:#666">Duração estimada: 30 Minutos⏱ — Paradas: • </small>
         </div>
-        <div>
-          <!-- abre exatamente o link que você me mandou -->
-          <a class="btn" href="https://maps.app.goo.gl/Z199k9ygiooHTh3p6" target="_blank" style="padding:8px 12px;border-radius:8px;">Abrir no Maps</a>
-        </div>
+        <a class="btn" href="https://maps.app.goo.gl/Z199k9ygiooHTh3p6" target="_blank" rel="noopener noreferrer">
+          Abrir no Maps
+        </a>
       </div>
-
-      <!-- Espaço para adicionar outras rotas -->
-      <!-- Exemplo:
-      <div class="route-item">
-        <div><div style="font-weight:800">Rota 02 — Bairro X</div><small style="color:#666">...</small></div>
-        <div><button onclick="openMapsWithCoords('LAT,LON')">Abrir no Maps</button></div>
-      </div>
-      -->
     </div>
 
     <div style="margin-top:18px">
       <button class="btn" onclick="backToMenu()">Voltar</button>
     </div>
   </section>
-
 </main>
 
 <!-- MODAIS -->
 <div id="avisosModalBack" class="modal-back" aria-hidden="true" style="display:none">
   <div class="modal">
-    <button class="close" onclick="closeModal('avisosModalBack')">✕</button>
+    <button class="close" onclick="closeModal('avisosModalBack')" aria-label="Fechar">✕</button>
     <h3>Avisos Importantes</h3>
     <ul>
       <li>Preencher o Controle de Veículo 2× ao dia (entrada e saída).</li>
@@ -168,74 +128,17 @@
 
 <div id="ajudaModalBack" class="modal-back" aria-hidden="true" style="display:none">
   <div class="modal">
-    <button class="close" onclick="closeModal('ajudaModalBack')">✕</button>
+    <button class="close" onclick="closeModal('ajudaModalBack')" aria-label="Fechar">✕</button>
     <h3>Ajuda & Explicação dos Botões</h3>
     <p><strong>Preencher Controle de Veículo:</strong> Abre o formulário obrigatório (Google Forms). Preencher na entrada e na saída.</p>
     <p><strong>Selecionar Rota:</strong> Mostra as rotas publicadas pela gestão; ao clicar em "Abrir no Maps" o Google Maps será aberto com a rota pronta.</p>
     <p><strong>Avisos:</strong> Comunicados importantes e mudanças operacionais — leia sempre antes de iniciar.</p>
     <p><strong>Instalar / Adicionar à Tela Inicial:</strong> Permite transformar o site em um app no celular do motorista.</p>
-    <div style="margin-top:12px"><button class="btn" onclick="closeModal('ajudaModalBack')">Fechar</button></div>
+    <div style="margin-top:12px">
+      <button class="btn" onclick="closeModal('ajudaModalBack')">Fechar</button>
+    </div>
   </div>
 </div>
-
-<script>
-  // simple UI control
-  function enterApp(){
-    document.getElementById('welcome').style.display = 'none';
-    document.getElementById('mainMenu').style.display = 'block';
-    // focus for screen readers
-    document.getElementById('mainMenu').scrollIntoView({behavior:'smooth'});
-  }
-  function openSection(id){
-    document.getElementById('mainMenu').style.display = 'none';
-    document.getElementById('rotasSection').style.display = 'block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  function backToMenu(){
-    document.getElementById('rotasSection').style.display = 'none';
-    document.getElementById('mainMenu').style.display = 'block';
-  }
-
-  function openModal(which){
-    if(which==='avisosModal') document.getElementById('avisosModalBack').style.display='flex';
-    if(which==='ajudaModal') document.getElementById('ajudaModalBack').style.display='flex';
-  }
-  function closeModal(id){
-    document.getElementById(id).style.display='none';
-  }
-
-  // Dark toggle
-  const darkToggle = document.getElementById('darkToggle');
-  darkToggle.addEventListener('click',()=>{
-    document.body.classList.toggle('dark');
-    localStorage.setItem('ac_dark', document.body.classList.contains('dark') ? '1':'0');
-  });
-  // persist
-  if(localStorage.getItem('ac_dark')==='1') document.body.classList.add('dark');
-
-  // PWA install prompt handling
-  let deferredPrompt;
-  const installBtn = document.getElementById('installBtn');
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'inline-block';
-  });
-  installBtn.addEventListener('click', async ()=>{
-    if(!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const choice = await deferredPrompt.userChoice;
-    installBtn.style.display = 'none';
-    deferredPrompt = null;
-  });
-
-  // helper (optional): open maps with coordinates or query
-  function openMapsWithCoords(q){
-    // q can be a place name or "lat,lon"
-    const url = 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
-    window.open(url,'_blank');
-  }
-</script>
 
 </body>
 </html>
